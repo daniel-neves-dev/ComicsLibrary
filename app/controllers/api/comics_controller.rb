@@ -5,7 +5,7 @@ module Api
     def index
       @comics = Comic.all.sorted_by_title
 
-      render json: @comics
+      render json: ComicsRepresentative.new(@comics).as_json
     end
 
     def show
