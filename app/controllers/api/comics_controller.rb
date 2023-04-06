@@ -13,7 +13,8 @@ module Api
     end
 
     def create
-      @comic = Comic.new(comic_params)
+      author = Author.create(author_params)
+      @comic = Comic.new(comic_params.merge(author_id: author.id))
 
       if @comic.save
         render json: @comic, status: :created, location: api_comic_url(@comic)
@@ -39,10 +40,11 @@ module Api
       def set_comic
         @comic = Comic.find(params[:id])
       end
-
-
+    def author_params
+      params.require(:author).permit(:first_name, :last_name, :age)
+    end
       def comic_params
-        params.require(:comic).permit(:title, :author, :synopsis)
+        params.require(:comic).permit(:title, :synopsis)
       end
    end
 end

@@ -8,6 +8,7 @@ class ComicsRepresentative
       {
         id: comic.id,
         title: comic.title,
+        synopsis: comic.synopsis,
         author_name: author_name(comic),
         author_age: comic.author.age
       }
